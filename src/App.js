@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import './App.css';
+import './index.css';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
     // </div>
 
     <div>
-      <section class="header">
+      <section className="header">
         <div>
           <header>
             <h1>Quarantivities</h1>
@@ -32,7 +32,7 @@ function App() {
       <div>
         <nav>
           <div id="hamburger-menu">
-            <div class="menu-link" id="about-link">
+            <div className="menu-link" id="about-link">
               <a href="about.html">About</a>
             </div>
           </div>
@@ -42,37 +42,37 @@ function App() {
 
     <main>
 
-      <form class="form-inline">
+      <form className="form-inline">
         <label for="keyword">Search</label>
-        <input type="text" class="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
+        <input type="text" className="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
 
-        <div class="form-check mb-2 mr-sm-2">
-          <input class="form-check-input" type="checkbox" id="outdoor" checked="true" />
-          <label class="form-check-label" for="outdoor">outdoor</label>
+        <div className="form-check mb-2 mr-sm-2">
+          <input className="form-check-input" type="checkbox" id="outdoor" checked="true" />
+          <label className="form-check-label" for="outdoor">outdoor</label>
         </div>
 
-        <div class="form-check mb-2 mr-sm-4">
-          <input class="form-check-input" type="checkbox" id="indoor" checked="true" />
-          <label class="form-check-label" for="indoor">indoor</label>
+        <div className="form-check mb-2 mr-sm-4">
+          <input className="form-check-input" type="checkbox" id="indoor" checked="true" />
+          <label className="form-check-label" for="indoor">indoor</label>
         </div>
 
-        <button type="submit" id="submit" class="btn btn-info mb-2">Submit</button>
+        <button type="submit" id="submit" className="btn btn-info mb-2">Submit</button>
 
-        <p class="activity-counter" id="activity-counter"></p>
+        <p className="activity-counter" id="activity-counter"></p>
       </form>
 
-      <div class="container">
-        <div class="row">
-          <div class="col-8">
-            <section class="activities-container">
+      <div className="container">
+        <div className="row">
+          <div className="col-8">
+            <section className="activities-container">
 
               {/*<!-- rendered activities will show up here --> */}
 
             </section>
           </div>
 
-          <div class="col-4">
-            <div class="map" id="map" aria-label="interactive map of all activities">
+          <div className="col-4">
+            <div className="map" id="map" aria-label="interactive map of all activities">
             </div>
           </div>
         </div>
