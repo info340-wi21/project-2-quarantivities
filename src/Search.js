@@ -30,7 +30,7 @@ export function Search(props) {
     );
 }
 
-function submitForm(props) {
+function submitForm(props) { // props will be state?
     // todo: add form submission functionality, save value of checkboxes/search query
 
     // -- copied code from project 1 index.js 
@@ -40,5 +40,13 @@ function submitForm(props) {
     // state.showIndoor = document.querySelector("#indoor").checked;
     // renderAllActivities(state.currentData);
 
+    let state = {
+        firstLoad = false,
+        search = (document.querySelector('#keyword').value).toLowerCase(),
+        showOutdoor = document.querySelector("#outdoor").checked,
+        showIndoor = document.querySelector("#indoor").checked
+    };
+
+    // render new ActivityList based on state data filters?
 
 }
