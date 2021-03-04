@@ -1,7 +1,8 @@
 //import logo from './logo.svg';
 import './index.css';
+import { ActivityList } from './Activity';
 
-function App() {
+function App(props) {
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -65,7 +66,7 @@ function App() {
         <div className="row">
           <div className="col-8">
             <section className="activities-container">
-
+              <ActivityList activities={props.activities}/>
               {/*<!-- rendered activities will show up here --> */}
 
             </section>
@@ -73,6 +74,7 @@ function App() {
 
           <div className="col-4">
             <div className="map" id="map" aria-label="interactive map of all activities">
+              {/*<!-- map will show up here --> */}
             </div>
           </div>
         </div>

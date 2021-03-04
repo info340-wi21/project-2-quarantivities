@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css'; 
 import './index.css';
 import App from './App';
+import activities from './activities.csv';
+import * as d3 from 'd3';
 //import reportWebVitals from './reportWebVitals';
+
+
+let activitiesArr = [];
+
+d3.csv(activities).then(function(activities) {
+  activitiesArr.push(activities);
+  });
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App activities={activitiesArr}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
