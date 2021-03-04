@@ -1,6 +1,7 @@
 //import logo from './logo.svg';
 import './index.css';
 import { ActivityList } from './Activity';
+import { Search } from './Search';
 
 function App(props) {
   return (
@@ -43,24 +44,8 @@ function App(props) {
 
     <main>
 
-      <form className="form-inline">
-        <label for="keyword">Search</label>
-        <input type="text" className="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
-
-        <div className="form-check mb-2 mr-sm-2">
-          <input className="form-check-input" type="checkbox" id="outdoor" checked="true" />
-          <label className="form-check-label" for="outdoor">outdoor</label>
-        </div>
-
-        <div className="form-check mb-2 mr-sm-4">
-          <input className="form-check-input" type="checkbox" id="indoor" checked="true" />
-          <label className="form-check-label" for="indoor">indoor</label>
-        </div>
-
-        <button type="submit" id="submit" className="btn btn-info mb-2">Submit</button>
-
-        <p className="activity-counter" id="activity-counter"></p>
-      </form>
+      {/* Search bar goes here */}
+      <Search />
 
       <div className="container">
         <div className="row">

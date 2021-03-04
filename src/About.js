@@ -2,9 +2,9 @@ import React from 'react';
 
 function AboutPage() {
     return (
-        <div class="aboutContainer">
-            <div class="bodytext">
-                <div class="problem-domain">
+        <div className="aboutContainer">
+            <div className="bodytext">
+                <div className="problem-domain">
                     <section>
                         <h2>Problem Domain</h2>
                         <p>Due to the COVID-19 pandemic, <a
@@ -23,7 +23,7 @@ function AboutPage() {
                         <p>While there are websites or blogs that suggest social-distanced activities that are safe,
                             most of the suggested activities are very generic (eg. <a
                                 href="https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/safe-activities-during-covid19/art-20489385">attend
-                                virtual fitness classes</a>,
+                                virtual fitness classNamees</a>,
                             <a href="https://blog.wa.aaa.com/travel/travel-tips/things-to-do-while-social-distancing/">go
                                 on a hike</a>)
                             and we wanted to provide a web app that suggests personable and creative activity ideas.
@@ -41,7 +41,7 @@ function AboutPage() {
                 </div>
 
 
-                <div class="app-description">
+                <div className="app-description">
                     <section>
                         <h2>App Description</h2>
                         <p>The primary users of this application will be people who live in Washington ages 18-40.
