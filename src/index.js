@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
 import activities from './activities.json';
-import * as d3 from 'd3';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
