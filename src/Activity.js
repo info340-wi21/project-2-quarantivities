@@ -1,24 +1,6 @@
 import React from 'react';
 
-// IN THE APP.JS APP COMPONENT:
-
-// const [pets, setPets] = useState(props.pets);
-//   function handleAdopt(nameStr) {
-//     let petsCopy = pets.map((pet) => {
-//       if(pet.name === nameStr) {
-//         pet.adopted = true;
-//       }  
-//       return pet;
-//     });
-//     setPets(petsCopy);
-//   } 
-
-
-export function ActivityCard(props) {  
-    // let displayedName = props.pet.name;
-    // if(props.pet.adopted === true) {
-    //   displayedName = props.pet.name + " (Adopted)";
-    // }
+export function ActivityCard(props) {
 
     let activityID = props.activity.activityID;
     let name = props.activity.name;
@@ -28,7 +10,7 @@ export function ActivityCard(props) {
     let streetAddress = props.activity.streetAddress;
     let imgLink = props.activity.imgLink;
     let moreInfoLink = props.activity.moreInfoLink;
-  
+
     return (
         <div className="container card">
             <div className="card-body">
@@ -36,15 +18,15 @@ export function ActivityCard(props) {
                     <div className="col-sm-auto">
                         <img className="pb-3 activity-img" src={imgLink} alt={name} />
                     </div>
-                    
+
                     <div className="col-sm">
                         <h2 className="card-title">{name}</h2>
                         <p className="card-text">{description}</p>
                         <p className="card-text">Tags: {tags}</p>
                         <p className="card-text">Rating: {rating}/5</p>
-                        
+
                         <button className="btn btn-dark" type="button" data-toggle="modal" data-target={`#${activityID}`}>More Info</button>
-                        
+
                         <div className="modal" id={`${activityID}Modal`} tabindex="-1" role="dialog" aria-labelledby={`${activityID}ModalLabel`} aria-hidden="true">
                             <div className="model-dialog" role="document">
                                 <div className="modal-content">
@@ -66,20 +48,38 @@ export function ActivityCard(props) {
             </div>
         </div>
     );
-  }
-  
-export function ActivityList(props) { // pass state in as a prop: query, indoor/outdoor
+}
+
+export function ActivityList(props) { // pass state in as a prop: searchQuery, indoor/outdoor
     let allActivities = props.activities.map((activity) => {
-      return (  
-        <div>
-            <ActivityCard activity={activity} key={activity.activityID}/>
-        </div>
-      )
+
+        // create variables from props to assist filter
+        let searchQuery = props.searchQuery;
+        let firstLoad = props.firstLoad;
+        let showOutdoor = props.showOutdoor;
+        let showIndoor = props.showIndoor;
+
+        let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();
+        let elemOutdoor = JSON.parse((activity.outdoor));
+        let correctInOutdoor = ((elemOutdoor === false) && (showIndoor === true)) || ((elemOutdoor === true) && (showOutdoor === true));
+
+
+        // only render ActivityCard  & map if it meets filter requirements
+        if (firstLoad || ((correctInOutdoor) && (activityDetails.includes(searchQuery)))) {
+            return (
+                <div>
+                    <ActivityCard activity={activity} key={activity.activityID} />
+                    {/* todo: RENDER MAP POINT HERE? */}
+                </div>
+            );
+        } else {
+            return '';
+        }
     });
 
     return (
-      <div>
-          {allActivities}
-      </div>
+        <div>
+            {allActivities}
+        </div>
     );
-  }
+}

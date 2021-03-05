@@ -11,6 +11,7 @@ let DefaultIcon = L.icon({
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
+
 function MakeMap(props) { // props would be activityObj
     let array = [];
     for (let i = 0; i < props.activities.length; i++) {
@@ -24,7 +25,7 @@ function MakeMap(props) { // props would be activityObj
                     <Popup>
                         <div>
                             <h2>{props.activities[i].name}</h2>
-                            <img src={props.activities[i].imgLink} style={{ width: "100%", height:"auto" }}alt={props.activities[i].name} />
+                            <img src={props.activities[i].imgLink} style={{ width: "100%", height: "auto" }} alt={props.activities[i].name} />
                             <p>{props.activities[i].description}</p>
                             <p>{props.activities[i].streetAddress}</p>
                         </div>
@@ -35,14 +36,14 @@ function MakeMap(props) { // props would be activityObj
     }
     return (
         <div className="map">
-            <MapContainer style={{ height: "800px", width: "800px"}} center={[47.7511, -120.7401]} zoom={7}>
+            <MapContainer style={{ height: "800px", width: "800px" }} center={[47.7511, -120.7401]} zoom={7}>
                 <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     attribution='$copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>' />
-                    {array}
+                {array}
             </MapContainer>
         </div>
     );
 }
 
 export default MakeMap;
-export {MakeMap};
+export { MakeMap };

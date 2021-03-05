@@ -1,26 +1,44 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 export function Search(props) {
-    
+
+    let searchQuery = props.searchQuery;
+
+    const history = useHistory();
+    const onSubmit = e => {
+        history.push(`?s=${searchQuery}`)
+        e.preventDefault()
+        props.setFirstLoad(false);
+    }
+
+    const onChangeIndoor = () => {
+        props.setShowIndoor(!(props.showIndoor));
+    }
+
+    const onChangeOutdoor = () => {
+        props.setShowOutdoor(!(props.showOutdoor));
+    }
+
     let result = (
-        <form className="form-inline" >
-        <label for="keyword">Search</label>
-        <input value={props.searchQuery} onInput={e => props.setSearchQuery(e.target.value)} name="s" type="text" className="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
+        <form action="/" method="get" className="form-inline" onSubmit={onSubmit}>
+            <label for="keyword">Search</label>
+            <input value={props.searchQuery} onInput={e => props.setSearchQuery(e.target.value)} name="s" type="text" className="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
 
-        <div className="form-check mb-2 mr-sm-2">
-          <input className="form-check-input" type="checkbox" id="outdoor" checked="true" />
-          <label className="form-check-label" for="outdoor">outdoor</label>
-        </div>
+            <div className="form-check mb-2 mr-sm-2">
+                <input className="form-check-input" type="checkbox" id="outdoor" defaultChecked="true" onChange={onChangeOutdoor} />
+                <label className="form-check-label" for="outdoor">outdoor</label>
+            </div>
 
-        <div className="form-check mb-2 mr-sm-4">
-          <input className="form-check-input" type="checkbox" id="indoor" checked="true" />
-          <label className="form-check-label" for="indoor">indoor</label>
-        </div>
+            <div className="form-check mb-2 mr-sm-4">
+                <input className="form-check-input" type="checkbox" id="indoor" defaultChecked="true" onChange={onChangeIndoor} />
+                <label className="form-check-label" for="indoor">indoor</label>
+            </div>
 
-        <button type="submit" id="submit" className="btn btn-info mb-2" onClick={submitForm}>Submit</button>
+            <button type="submit" id="submit" className="btn btn-info mb-2" >Submit</button> {/* removed onClick={submitForm} */}
 
-        <p className="activity-counter" id="activity-counter"></p>
-      </form>
+            <p className="activity-counter" id="activity-counter"></p>
+        </form>
     );
 
     return (
@@ -28,25 +46,4 @@ export function Search(props) {
             {result}
         </div>
     );
-}
-
-function submitForm(props) { // props will be state?
-    // todo: add form submission functionality, save value of checkboxes/search query
-
-    // -- copied code from project 1 index.js 
-    // state.firstLoad = false;
-    // state.search = (document.querySelector('#keyword').value).toLowerCase();
-    // state.showOutdoor = document.querySelector("#outdoor").checked;
-    // state.showIndoor = document.querySelector("#indoor").checked;
-    // renderAllActivities(state.currentData);
-
-    let state = {
-        firstLoad: false,
-        search: (document.querySelector('#keyword').value).toLowerCase(),
-        showOutdoor: document.querySelector("#outdoor").checked,
-        showIndoor: document.querySelector("#indoor").checked
-    };
-
-    // render new ActivityList based on state data filters?
-
 }

@@ -8,13 +8,14 @@ import { MakeMap } from './Map';
 function App(props) {
 
   // create constants for search
+  const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
   const [searchQuery, setSearchQuery] = useState(query || '');
 
   const [firstLoad, setFirstLoad] = useState(true);
-  const [showIndoor, setshowIndoor] = useState(true);
-  const [showOutdoor, setshowOutoor] = useState(true);
-  
+  const [showIndoor, setShowIndoor] = useState(true);
+  const [showOutdoor, setShowOutoor] = useState(true);
+
 
 
   return (
@@ -44,55 +45,56 @@ function App(props) {
           </header>
         </div>
 
-      <div>
-        <nav>
-          <div id="hamburger-menu">
-            <div className="menu-link" id="about-link">
-              <a href="about.html">About</a>
+        <div>
+          <nav>
+            <div id="hamburger-menu">
+              <div className="menu-link" id="about-link">
+                <a href="about.html">About</a>
+              </div>
             </div>
-          </div>
-        </nav>
-      </div>
-    </section>
+          </nav>
+        </div>
+      </section>
 
-    <main>
+      <main>
 
-      {/* Search bar goes here */}
-      <Search setFirstLoad={setFirstLoad} setSearchQuery={setSearchQuery} setshowIndoor={setshowOutoor} setshowIndoor={setshowIndoor} />
+        {/* Search bar goes here */}
+        <Search setFirstLoad={setFirstLoad} searchQuery={searchQuery} setSearchQuery={setSearchQuery} showOutdoor={showOutdoor} setShowOutdoor={setShowOutoor} showIndoor={showIndoor} setShowIndoor={setShowIndoor} />
 
-      <div className="container">
-        <div className="row">
-          <div className="col-8">
-            <section className="activities-container">
-              <ActivityList activities={props.activities}/>
-              {/*<!-- rendered activities will show up here --> */}
+        <div className="container">
+          <div className="row">
+            <div className="col-8">
+              <section className="activities-container">
 
-            </section>
-          </div>
+                {/*<!-- rendered activities will show up here --> */}
+                <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} />
 
-          <div className="col-4">
-            <div className="map" id="map" aria-label="interactive map of all activities">
-              {/*<!-- map will show up here --> */}
-              {/* <MakeMap props={props.activities} /> */}
-              <MakeMap activities={props.activities} />
+              </section>
+            </div>
+
+            <div className="col-4">
+              <div className="map" id="map" aria-label="interactive map of all activities">
+                {/*<!-- map will show up here --> */}
+                {/* <MakeMap props={props.activities} /> */}
+                <MakeMap activities={props.activities} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer>
-      <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
+      <footer>
+        <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
         submit an activity to our database.</address>
-      <p>&copy; 2021 Glory Yang, Krystal Graylin, Tony Choi.</p>
-    </footer>
+        <p>&copy; 2021 Glory Yang, Krystal Graylin, Tony Choi.</p>
+      </footer>
 
-    {/*<!-- Load JavaScript libraries -->*/}
-    <script src="js/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
+      {/*<!-- Load JavaScript libraries -->*/}
+      <script src="js/index.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
 
-  </div>
+    </div>
   );
 }
 

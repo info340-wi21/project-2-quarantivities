@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.css'; 
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './App';
 import activities from './activities.json';
 import * as d3 from 'd3';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App activities={activities}/>
-  </React.StrictMode>,
+  (<React.StrictMode>
+    <BrowserRouter>
+      <App activities={activities} />
+    </BrowserRouter>
+  </React.StrictMode>)
+  ,
   document.getElementById('root')
 );
