@@ -71,7 +71,9 @@ export function ActivityCard(props) {
 export function ActivityList(props) {
     let allActivities = props.activities.map((activity) => {
       return (  
-        <ActivityCard activity={activity} key={activity.activityID}/>
+        <div>
+            <ActivityCard activity={activity} key={activity.activityID}/>
+        </div>
       )
     });
 
