@@ -3,9 +3,9 @@ import React from 'react';
 export function Search(props) {
     
     let result = (
-        <form className="form-inline">
+        <form className="form-inline" >
         <label for="keyword">Search</label>
-        <input type="text" className="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
+        <input value={props.searchQuery} onInput={e => props.setSearchQuery(e.target.value)} name="s" type="text" className="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
 
         <div className="form-check mb-2 mr-sm-2">
           <input className="form-check-input" type="checkbox" id="outdoor" checked="true" />

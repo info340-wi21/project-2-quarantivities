@@ -68,7 +68,7 @@ export function ActivityCard(props) {
     );
   }
   
-export function ActivityList(props) {
+export function ActivityList(props) { // pass state in as a prop: query, indoor/outdoor
     let allActivities = props.activities.map((activity) => {
       return (  
         <ActivityCard activity={activity} key={activity.activityID}/>

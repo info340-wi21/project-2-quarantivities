@@ -2,8 +2,20 @@
 import './index.css';
 import { ActivityList } from './Activity';
 import { Search } from './Search';
+import { useState } from 'react';
 
 function App(props) {
+
+  // create constants for search
+  const query = new URLSearchParams(search).get('s');
+  const [searchQuery, setSearchQuery] = useState(query || '');
+
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [showIndoor, setshowIndoor] = useState(true);
+  const [showOutdoor, setshowOutoor] = useState(true);
+  
+
+
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -45,7 +57,7 @@ function App(props) {
     <main>
 
       {/* Search bar goes here */}
-      <Search />
+      <Search setFirstLoad={setFirstLoad} setSearchQuery={setSearchQuery} setshowIndoor={setshowOutoor} setshowIndoor={setshowIndoor} />
 
       <div className="container">
         <div className="row">
