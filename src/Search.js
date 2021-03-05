@@ -41,10 +41,10 @@ function submitForm(props) { // props will be state?
     // renderAllActivities(state.currentData);
 
     let state = {
-        firstLoad = false,
-        search = (document.querySelector('#keyword').value).toLowerCase(),
-        showOutdoor = document.querySelector("#outdoor").checked,
-        showIndoor = document.querySelector("#indoor").checked
+        firstLoad: false,
+        search: (document.querySelector('#keyword').value).toLowerCase(),
+        showOutdoor: document.querySelector("#outdoor").checked,
+        showIndoor: document.querySelector("#indoor").checked
     };
 
     // render new ActivityList based on state data filters?
