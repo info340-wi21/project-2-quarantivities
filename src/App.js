@@ -1,22 +1,12 @@
 //import logo from './logo.svg';
 import './index.css';
-import { ActivityList } from './Activity';
-import { Search } from './Search';
+import { AboutNav } from './AboutNav';
 import { useState } from 'react';
-import { MakeMap } from './Map';
+import { AboutPage } from './About';
+import { Main } from './Main';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 function App(props) {
-
-  // create constants for search
-  const { search } = window.location;
-  const query = new URLSearchParams(search).get('s');
-  const [searchQuery, setSearchQuery] = useState(query || '');
-
-  const [firstLoad, setFirstLoad] = useState(true);
-  const [showIndoor, setShowIndoor] = useState(true);
-  const [showOutdoor, setShowOutoor] = useState(true);
-
-
 
   return (
     // <div className="App">
@@ -46,41 +36,18 @@ function App(props) {
         </div>
 
         <div>
-          <nav>
-            <div id="hamburger-menu">
-              <div className="menu-link" id="about-link">
-                <a href="about.html">About</a>
-              </div>
-            </div>
-          </nav>
+          <div>
+            <AboutNav />
+          </div>
         </div>
       </section>
 
       <main>
-
-        {/* Search bar goes here */}
-        <Search setFirstLoad={setFirstLoad} searchQuery={searchQuery} setSearchQuery={setSearchQuery} showOutdoor={showOutdoor} setShowOutdoor={setShowOutoor} showIndoor={showIndoor} setShowIndoor={setShowIndoor} />
-
-        <div className="container">
-          <div className="row">
-            <div className="col-8">
-              <section className="activities-container">
-
-                {/*<!-- rendered activities will show up here --> */}
-                <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} />
-
-              </section>
-            </div>
-
-            <div className="col-4">
-              <div className="map" id="map" aria-label="interactive map of all activities">
-                {/*<!-- map will show up here --> */}
-                {/* <MakeMap props={props.activities} /> */}
-                <MakeMap activities={props.activities} />
-              </div>
-            </div>
-          </div>
-        </div>
+        <Switch>
+          <Route exact path="/"><Main activities={props.activities}/></Route>
+          <Route path="/About"><AboutPage /></Route>
+          <Redirect to="/" />
+        </Switch>
       </main>
 
       <footer>
