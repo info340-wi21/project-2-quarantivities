@@ -16,6 +16,8 @@ function App(props) {
   const [showIndoor, setShowIndoor] = useState(true);
   const [showOutdoor, setShowOutoor] = useState(true);
 
+  //? const [relevantActivities, setRelevantActivities] = useState(props.activities);
+
 
 
   return (
@@ -66,8 +68,10 @@ function App(props) {
             <div className="col-8">
               <section className="activities-container">
 
-                {/*<!-- rendered activities will show up here --> */}
+                {/*<!-- rendered activities will show up here -->
+                removed: setRelevantActivities={setRelevantActivities} relevantActivities={relevantActivities}  */}
                 <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} />
+
 
               </section>
             </div>

@@ -50,14 +50,16 @@ export function ActivityCard(props) {
     );
 }
 
-export function ActivityList(props) { // pass state in as a prop: searchQuery, indoor/outdoor
-    let allActivities = props.activities.map((activity) => {
+export function ActivityList(props) {
 
-        // create variables from props to assist filter
-        let searchQuery = props.searchQuery;
-        let firstLoad = props.firstLoad;
-        let showOutdoor = props.showOutdoor;
-        let showIndoor = props.showIndoor;
+    // create variables from props to assist filter
+    let searchQuery = props.searchQuery;
+    let firstLoad = props.firstLoad;
+    let showOutdoor = props.showOutdoor;
+    let showIndoor = props.showIndoor;
+    //? let relevantActivities = [];
+
+    let allActivities = props.activities.map((activity) => {
 
         let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();
         let elemOutdoor = JSON.parse((activity.outdoor));
@@ -66,6 +68,8 @@ export function ActivityList(props) { // pass state in as a prop: searchQuery, i
 
         // only render ActivityCard  & map if it meets filter requirements
         if (firstLoad || ((correctInOutdoor) && (activityDetails.includes(searchQuery)))) {
+
+            //? relevantActivities.push(activity);
             return (
                 <div>
                     <ActivityCard activity={activity} key={activity.activityID} />
@@ -76,6 +80,8 @@ export function ActivityList(props) { // pass state in as a prop: searchQuery, i
             return '';
         }
     });
+
+    //? props.setRelevantActivities(relevantActivities);
 
     return (
         <div>
