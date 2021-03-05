@@ -3,6 +3,7 @@ import './index.css';
 import { ActivityList } from './Activity';
 import { Search } from './Search';
 import { useState } from 'react';
+import { MakeMap } from './Map';
 
 function App(props) {
 
@@ -72,6 +73,8 @@ function App(props) {
           <div className="col-4">
             <div className="map" id="map" aria-label="interactive map of all activities">
               {/*<!-- map will show up here --> */}
+              {/* <MakeMap props={props.activities} /> */}
+              <MakeMap activities={props.activities} />
             </div>
           </div>
         </div>
