@@ -11,12 +11,12 @@ export function ActivityCard(props) {
     let moreInfoLink = props.activity.moreInfoLink;
 
     const [moreInfo, setMoreInfo] = useState(false);
-		
+
     const handleClick = () => {
-    setMoreInfo(!moreInfo);
+        setMoreInfo(!moreInfo);
     }
 
-    if(moreInfo) {
+    if (moreInfo) {
         return (
             <div className="container card">
                 <div className="card-body">
@@ -24,13 +24,13 @@ export function ActivityCard(props) {
                         <div className="col-sm-auto">
                             <img className="pb-3 activity-img" src={imgLink} alt={name} />
                         </div>
-    
+
                         <div className="col-sm">
                             <h2 className="card-title">{name}</h2>
                             <p className="card-text">{description}</p>
                             <p className="card-text">Tags: {tags}</p>
                             <p className="card-text">Rating: {rating}/5</p>
-    
+
                             <button onClick={handleClick} className="btn btn-dark" type="button">Less Info</button>
                             <p></p>
                             <p className="card-text">Location: {streetAddress}</p>
@@ -49,13 +49,13 @@ export function ActivityCard(props) {
                         <div className="col-sm-auto">
                             <img className="pb-3 activity-img" src={imgLink} alt={name} />
                         </div>
-    
+
                         <div className="col-sm">
                             <h2 className="card-title">{name}</h2>
                             <p className="card-text">{description}</p>
                             <p className="card-text">Tags: {tags}</p>
                             <p className="card-text">Rating: {rating}/5</p>
-    
+
                             <button onClick={handleClick} className="btn btn-dark" type="button">More Info</button>
                         </div>
                     </div>
@@ -73,7 +73,6 @@ export function ActivityList(props) {
     let firstLoad = props.firstLoad;
     let showOutdoor = props.showOutdoor;
     let showIndoor = props.showIndoor;
-    //? let relevantActivities = [];
 
     let allActivities = props.activities.map((activity) => {
 
@@ -88,16 +87,13 @@ export function ActivityList(props) {
             //? relevantActivities.push(activity);
             return (
                 <div>
-                    <ActivityCard activity={activity} key={activity.activityID} moreInfo={props.moreInfo} setMoreInfo={props.setMoreInfo}/>
-                    {/* todo: RENDER MAP POINT HERE? */}
+                    <ActivityCard activity={activity} key={activity.activityID} moreInfo={props.moreInfo} setMoreInfo={props.setMoreInfo} />
                 </div>
             );
         } else {
             return '';
         }
     });
-
-    //? props.setRelevantActivities(relevantActivities);
 
     return (
         <div>

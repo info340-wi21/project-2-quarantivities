@@ -28,21 +28,14 @@ export function Main(props) {
 
                         </section>
                     </div>
-                        <div className="col-4">
-                            <div className="map" id="map" aria-label="interactive map of all activities">
-                                {/*<!-- map will show up here --> */}
-                                {/* <MakeMap props={props.activities} /> */}
-                                <MakeMap activities={props.activities} />
-                            </div>
+                    <div className="col-4">
+                        <div className="map" id="map" aria-label="interactive map of all activities">
+                            {/*<!-- map will show up here --> */}
+                            <MakeMap activities={props.activities} />
                         </div>
                     </div>
                 </div>
-
-            {/* <footer>
-                <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
-                    submit an activity to our database.</address>
-                    <p>&copy; 2021 Glory Yang, Krystal Graylin, Tony Choi.</p>
-            </footer> */}
+            </div>
         </div>
     )
 }
