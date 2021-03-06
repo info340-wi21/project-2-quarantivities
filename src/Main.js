@@ -20,7 +20,14 @@ export function Main(props) {
 
             <div className="container">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-md-4 col-sm-12">
+                        <div className="map" id="map" aria-label="interactive map of all activities">
+                            {/*<!-- map will show up here --> */}
+                            {/* <MakeMap props={props.activities} /> */}
+                            <MakeMap activities={props.activities} />
+                        </div>
+                    </div>
+                    <div className="col-md-8 col-sm-12">
                         <section className="activities-container">
 
                             {/*<!-- rendered activities will show up here --> */}
@@ -28,15 +35,8 @@ export function Main(props) {
 
                         </section>
                     </div>
-                        <div className="col-4">
-                            <div className="map" id="map" aria-label="interactive map of all activities">
-                                {/*<!-- map will show up here --> */}
-                                {/* <MakeMap props={props.activities} /> */}
-                                <MakeMap activities={props.activities} />
-                            </div>
-                        </div>
-                    </div>
                 </div>
+            </div>
 
             {/* <footer>
                 <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
