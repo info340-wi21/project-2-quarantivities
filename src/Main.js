@@ -38,11 +38,11 @@ export function Main(props) {
                     </div>
                 </div>
 
-            <footer>
+            {/* <footer>
                 <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
                     submit an activity to our database.</address>
                     <p>&copy; 2021 Glory Yang, Krystal Graylin, Tony Choi.</p>
-            </footer>
+            </footer> */}
         </div>
     )
 }
