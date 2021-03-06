@@ -1,7 +1,6 @@
 //import logo from './logo.svg';
 import './index.css';
 import { AboutNav } from './AboutNav';
-import { useState } from 'react';
 import { AboutPage } from './About';
 import { Main } from './Main';
 import { Route, Switch, Redirect } from 'react-router-dom';
