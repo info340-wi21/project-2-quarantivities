@@ -24,7 +24,7 @@ export function Main(props) {
                         <div className="map" id="map" aria-label="interactive map of all activities">
                             {/*<!-- map will show up here --> */}
                             {/* <MakeMap props={props.activities} /> */}
-                            <MakeMap activities={props.activities} />
+                            <MakeMap activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} />
                         </div>
                     </div>
                     <div className="col-md-8 col-sm-12">

@@ -12,22 +12,42 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-function MakeMap(props) { // props would be activityObj
+export function MakeMap(props) { // props would be activityObj
+
+    let searchQuery = props.searchQuery;
+    let firstLoad = props.firstLoad;
+    let showOutdoor = props.showOutdoor;
+    let showIndoor = props.showIndoor;
+    let filteredActivities = [];
+
+    props.activities.map((activity) => {
+        
+        let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();
+        let elemOutdoor = JSON.parse((activity.outdoor));
+        let correctInOutdoor = ((elemOutdoor === false) && (showIndoor === true)) || ((elemOutdoor === true) && (showOutdoor === true));
+
+
+        // only render ActivityCard  & map if it meets filter requirements
+        if (firstLoad || ((correctInOutdoor) && (activityDetails.includes(searchQuery)))) {
+            filteredActivities.push(activity);
+        }
+    });
+    console.log(filteredActivities);
     let array = [];
-    for (let i = 0; i < props.activities.length; i++) {
-        if (props.activities[i].latitude != null) {
+    for (let i = 0; i < filteredActivities.length; i++) {
+        if (filteredActivities[i].latitude != null) {
             array.push(
-                <Marker key={props.activities[i].name}
+                <Marker key={filteredActivities[i].name}
                     position={[
-                        props.activities[i].latitude,
-                        props.activities[i].longitude
+                        filteredActivities[i].latitude,
+                        filteredActivities[i].longitude
                     ]}>
                     <Popup>
                         <div>
-                            <h2>{props.activities[i].name}</h2>
-                            <img src={props.activities[i].imgLink} style={{ width: "100%", height: "auto" }} alt={props.activities[i].name} />
-                            <p>{props.activities[i].description}</p>
-                            <p>{props.activities[i].streetAddress}</p>
+                            <h2>{filteredActivities[i].name}</h2>
+                            <img src={filteredActivities[i].imgLink} style={{ width: "100%", height: "auto" }} alt={filteredActivities[i].name} />
+                            <p>{filteredActivities[i].description}</p>
+                            <p>{filteredActivities[i].streetAddress}</p>
                         </div>
                     </Popup>
                 </Marker>
@@ -45,5 +65,4 @@ function MakeMap(props) { // props would be activityObj
     );
 }
 
-export default MakeMap;
-export { MakeMap };
+
