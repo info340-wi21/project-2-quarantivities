@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import activities from './activities.json';
 import { BrowserRouter } from 'react-router-dom';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
@@ -21,9 +21,10 @@ const firebaseConfig = {
   appId: "1:332862832622:web:965f4b5521422d7dfcd8ff",
   measurementId: "G-YP23439M29"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+// firebase.analytics(); // this line gave an error
 
 ReactDOM.render(
   (<React.StrictMode>

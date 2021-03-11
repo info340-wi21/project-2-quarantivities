@@ -22,7 +22,7 @@ export function Search(props) {
 
     let result = (
         <form action="/" method="get" className="form-inline" onSubmit={onSubmit}>
-            <label for="keyword">Search</label>
+            <label for="keyword">Search & Filter Activities:</label>
             <input value={props.searchQuery} onInput={e => props.setSearchQuery(e.target.value)} name="s" type="text" className="form-control mb-2 ml-sm-2 mr-sm-4" id="keyword" placeholder="ex. trail, Kirkland, etc." />
 
             <div className="form-check mb-2 mr-sm-2">
@@ -35,7 +35,7 @@ export function Search(props) {
                 <label className="form-check-label" for="indoor">indoor</label>
             </div>
 
-            <button type="submit" id="submit" className="btn btn-info mb-2" >Submit</button> {/* removed onClick={submitForm} */}
+            <button type="submit" id="submit" className="btn btn-info mb-2" >Search</button>
 
             <p className="activity-counter" id="activity-counter"></p>
         </form>

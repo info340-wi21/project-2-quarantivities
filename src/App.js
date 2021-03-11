@@ -1,50 +1,113 @@
-//import logo from './logo.svg';
 import './index.css';
 import { AboutNav } from './AboutNav';
 import { AboutPage } from './About';
 import { Main } from './Main';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { useEffect, useState } from 'react';
+
+// FirebaseUI config
+const uiConfig = {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true
+    }
+  ],
+  credentialHelper: 'none',
+  callbacks: {
+    // avoids redirecting after sign-in
+    signInSuccessWithAuthResult: () => false
+  }
+}
+
+// handle sign-out
+const handleSignOut = () => {
+  firebase.auth().signOut();
+}
+
 function App(props) {
 
-  return (
-    <div>
-      <section className="header">
-        <div>
+  // holds the current site user
+  const [user, setUser] = useState(undefined);
+
+  // auth state event listener
+  useEffect(() => { // run after component loads
+    // listen for changes
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
+      // auth state has changed
+      console.log("auth state has changed!");
+      setUser(firebaseUser);
+    })
+  })
+
+  let app = null; // content that will render
+
+  if (!user) { // if user is logged out
+    app = (
+      <div className="container">
+        <div className="header pb-5">
           <header>
             <h1>Quarantivities</h1>
             <p>Fun & Safe Activities in the Pacific Northwest</p>
           </header>
         </div>
 
-        <div>
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      </div>
+    );
+
+  } else { // if user is logged in
+    app = (
+      <div>
+        <section className="header">
           <div>
-            <AboutNav />
+            <header>
+              <h1>Quarantivities</h1>
+              <p>Fun & Safe Activities in the Pacific Northwest</p>
+            </header>
           </div>
-        </div>
-      </section>
 
-      <main>
-        <Switch>
-          <Route exact path="/"><Main activities={props.activities} /></Route>
-          <Route path="/About"><AboutPage /></Route>
-          <Redirect to="/" />
-        </Switch>
-      </main>
 
-      <footer>
-        <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
-        submit an activity to our database.</address>
-        <p>&copy; 2021 Glory Yang, Krystal Graylin, Tony Choi.</p>
-      </footer>
+          <div className="form-inline">
+            <AboutNav />
+            <button className="btn btn-sm btn-outline-secondary ml-3" onClick={handleSignOut}>Log Out</button>
+          </div>
 
-      {/*<!-- Load JavaScript libraries -->*/}
-      <script src="js/index.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
 
-    </div>
-  );
+        </section>
+
+        <main>
+          <Switch>
+            <Route exact path="/"><Main activities={props.activities} /></Route>
+            <Route path="/About"><AboutPage /></Route>
+            {/* include route to liked page? */}
+            <Redirect to="/" />
+          </Switch>
+        </main>
+
+        <footer>
+          <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
+          submit an activity to our database.</address>
+          <p>&copy; 2021 Glory Yang, Krystal Graylin, Tony Choi.</p>
+        </footer>
+
+        {/*<!-- Load JavaScript libraries -->*/}
+        <script src="js/index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
+
+      </div>
+    );
+  }
+
+
+
+
+  return (app);
 }
 
 export default App;
