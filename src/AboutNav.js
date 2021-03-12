@@ -3,7 +3,7 @@ import React from 'react';
 
 function AboutNav() {
     return (
-        <nav id="aboutLinks">
+        <nav id="aboutLinks" className="form-inline">
             <div className="menu-link" id="about-link">
                 <NavLink to="/" activeClassName="activeLink">Home</NavLink>
             </div>

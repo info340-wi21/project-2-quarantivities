@@ -14,7 +14,7 @@ export function Main(props) {
     const [showOutdoor, setShowOutoor] = useState(true);
 
     return (
-        <div>
+        <div className="container">
             {/* Search bar goes here */}
             <Search setFirstLoad={setFirstLoad} searchQuery={searchQuery} setSearchQuery={setSearchQuery} showOutdoor={showOutdoor} setShowOutdoor={setShowOutoor} showIndoor={showIndoor} setShowIndoor={setShowIndoor} />
 
