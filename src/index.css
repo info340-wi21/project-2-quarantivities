@@ -48,6 +48,10 @@ h2 {
     margin-left: 0.5rem;
 }
 
+#liked-link {
+    width: 9em;
+}
+
 nav a {
     display: block;
     width: 100%;

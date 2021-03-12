@@ -32,7 +32,7 @@ export function MakeMap(props) { // props would be activityObj
             filteredActivities.push(activity);
         }
     });
-    console.log(filteredActivities);
+    //console.log(filteredActivities);
     let array = [];
     for (let i = 0; i < filteredActivities.length; i++) {
         if (filteredActivities[i].latitude != null) {

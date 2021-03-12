@@ -31,7 +31,7 @@ export function Main(props) {
                         <section className="activities-container">
 
                             {/*<!-- rendered activities will show up here --> */}
-                            <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} />
+                            <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray}/>
 
                         </section>
                     </div>
