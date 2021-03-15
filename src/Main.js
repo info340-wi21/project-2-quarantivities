@@ -23,7 +23,6 @@ export function Main(props) {
                     <div className="col-md-4 col-sm-12">
                         <div className="map" id="map" aria-label="interactive map of all activities">
                             {/*<!-- map will show up here --> */}
-                            {/* <MakeMap props={props.activities} /> */}
                             <MakeMap activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} />
                         </div>
                     </div>
@@ -31,18 +30,12 @@ export function Main(props) {
                         <section className="activities-container">
 
                             {/*<!-- rendered activities will show up here --> */}
-                            <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={props.currentUser}/>
+                            <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={props.currentUser} />
 
                         </section>
                     </div>
                 </div>
             </div>
-
-            {/* <footer>
-                <address>Contact us at <a href="mailto:info@quarantivities.com">info@quarantivities.com</a> if you would like to
-                    submit an activity to our database.</address>
-                    <p>&copy; 2021 Glory Yang, Krystal Graylin, Tony Choi.</p>
-            </footer> */}
         </div>
     )
 }

@@ -76,15 +76,15 @@ function App(props) {
 
           <div className="form-inline">
             <AboutNav />
-            <button className="btn btn-sm btn-outline-secondary ml-3" onClick={handleSignOut}>Log Out</button>
+            <button className="btn btn-sm btn-outline-secondary ml-3 mb-2" onClick={handleSignOut}>Log Out</button>
           </div>
         </section>
 
         <main>
           <Switch>
-            <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user}/></Route>
+            <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
             <Route path="/About"><AboutPage /></Route>
-            <Route path="/Liked"><LikedPage activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user}/></Route>
+            <Route path="/Liked"><LikedPage activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
             <Redirect to="/" />
           </Switch>
         </main>

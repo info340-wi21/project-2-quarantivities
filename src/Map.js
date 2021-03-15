@@ -21,7 +21,7 @@ export function MakeMap(props) { // props would be activityObj
     let filteredActivities = [];
 
     props.activities.map((activity) => {
-        
+
         let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();
         let elemOutdoor = JSON.parse((activity.outdoor));
         let correctInOutdoor = ((elemOutdoor === false) && (showIndoor === true)) || ((elemOutdoor === true) && (showOutdoor === true));
@@ -32,7 +32,7 @@ export function MakeMap(props) { // props would be activityObj
             filteredActivities.push(activity);
         }
     });
-    //console.log(filteredActivities);
+
     let array = [];
     for (let i = 0; i < filteredActivities.length; i++) {
         if (filteredActivities[i].latitude != null) {
@@ -54,6 +54,7 @@ export function MakeMap(props) { // props would be activityObj
             )
         }
     }
+
     return (
         <div className="map">
             <MapContainer style={{ height: "500px", width: "auto" }} center={[47.7511, -120.7401]} zoom={7}>
@@ -64,5 +65,3 @@ export function MakeMap(props) { // props would be activityObj
         </div>
     );
 }
-
-

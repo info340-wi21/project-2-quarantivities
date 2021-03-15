@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 
 export function ActivityCard(props) {
 
-    // cretaing variables for activity info from props
+    // creating variables for activity info from props
     let name = props.activity.name;
     let description = props.activity.description;
     let tags = props.activity.tags;
@@ -34,10 +34,8 @@ export function ActivityCard(props) {
     }
 
     // Like button functionality
-
     const [curr, setCurr] = useState(false);
 
-    // use effect
     useEffect(() => {
         const userRef = firebase.database().ref(props.currentUser.uid)
 
@@ -49,13 +47,9 @@ export function ActivityCard(props) {
         childRef.on('value', function (snapshot) {
             snapshot.forEach(function (child) {
                 setCurr(child.node_.value_);
-                console.log(child)
-                console.log(child.node_.value_)
             });
         });
     }, [])
-
-
 
     const postLike = (event) => {
         event.preventDefault();

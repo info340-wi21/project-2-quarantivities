@@ -44,7 +44,7 @@ export function LikedPage(props) {
     // }, [])
 
 
-    // use effect
+    
     useEffect(() => {
         const userRef = firebase.database().ref(props.currentUser.uid)
 
@@ -59,14 +59,21 @@ export function LikedPage(props) {
             snapshot.forEach(function (child) {
 
                 let liked = child.node_.value_;
+                //let activityName = newUserObj.activity;
 
                 if (liked !== undefined && liked !== false) {
                     let currActivity = '';
-                    setLikedArray([...likedArray, currActivity])
+                    setLikedArray([...likedArray, currActivity]) // need to set currActivity
                 }
             });
         });
     }, [])
+
+    const likedList = likedArray.map((item) => {
+        return (
+             <ListItem />
+        );
+    });    
 
 
     if (likedArray.length === 0) {
@@ -81,29 +88,29 @@ export function LikedPage(props) {
         <div>
             <main>
                 <h1>Liked Activities</h1>
-                {/* {likedActivities} */}
+                {likedActivities}
                 <ActivityList activities={likedArray} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} />
             </main>
         </div>
     );
 }
 
-// export function LikedActivities(props) {
-//     // const likeActivity = () => {
+export function LikedActivities(props) {
+    // const likeActivity = () => {
 
-//     // }
-//     let firstLoad = true;
-//     let searchQuery = "";
-//     let showOutdoor = true;
-//     let showIndoor = true;
-//     let activity = props.liked;
+    // }
+    let firstLoad = true;
+    let searchQuery = "";
+    let showOutdoor = true;
+    let showIndoor = true;
+    let activity = props.liked;
 
-//     return (
-//         <div>
-//             <main>
-//                 <h1>Liked Activities</h1>
-//                 <ActivityList activities={activity} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} />
-//             </main>
-//         </div>
-//     );
-// }
+    return (
+        <div>
+            <main>
+                <h1>Liked Activities</h1>
+                <ActivityList activities={activity} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} />
+            </main>
+        </div>
+    );
+}
