@@ -84,9 +84,9 @@ function App(props) {
 
         <main>
           <Switch>
-            <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray}/></Route>
+            <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user}/></Route>
             <Route path="/About"><AboutPage /></Route>
-            <Route path="/Liked"><LikedPage activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} /></Route>
+            <Route path="/Liked"><LikedPage activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user}/></Route>
             <Redirect to="/" />
           </Switch>
         </main>
