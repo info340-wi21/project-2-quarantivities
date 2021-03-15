@@ -13,6 +13,9 @@ export function ActivityCard(props) {
     let imgLink = props.activity.imgLink;
     let moreInfoLink = props.activity.moreInfoLink;
 
+    let likedArray = props.likedArray;
+    let setLikedArray = props.setLikedArray;
+
     // More info button functionality
     const [moreInfo, setMoreInfo] = useState(false);
     const handleClick = () => {
@@ -49,12 +52,14 @@ export function ActivityCard(props) {
                 setCurr(child.node_.value_);
             });
         });
+        
+        return () => childRef.off('value');
     }, [])
 
     const postLike = (event) => {
         event.preventDefault();
 
-        const userRef = firebase.database().ref(props.currentUser.uid)
+        const userRef = firebase.database().ref(props.currentUser.uid);
 
         const newUserObj = {
             activity: props.activity.activityID
@@ -63,7 +68,7 @@ export function ActivityCard(props) {
 
         if (curr) {
             childRef.child('status').set(false)
-
+ 
         } else {
             userRef.child(newUserObj.activity).set(newUserObj.activity)
             childRef.child('status').set(true)

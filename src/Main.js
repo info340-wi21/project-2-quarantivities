@@ -31,8 +31,7 @@ export function Main(props) {
 
                             {/*<!-- rendered activities will show up here --> */}
                             <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={props.currentUser} />
-
-                        </section>
+                         </section>
                     </div>
                 </div>
             </div>

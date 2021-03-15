@@ -35,6 +35,7 @@ function App(props) {
   // holds the current site user
   const [user, setUser] = useState(undefined);
   const [likedArray, setLikedArray] = useState([]);
+  const [likedIds, setLikedIds] = useState([]); //activity IDs
 
   // auth state event listener
   useEffect(() => { // run after component loads
@@ -84,7 +85,7 @@ function App(props) {
           <Switch>
             <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
             <Route path="/About"><AboutPage /></Route>
-            <Route path="/Liked"><LikedPage activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
+            <Route path="/Liked"><LikedPage activities={props.activities} likedIds={likedIds} setLikedIds={setLikedIds} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
             <Redirect to="/" />
           </Switch>
         </main>
