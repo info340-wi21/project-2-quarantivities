@@ -43,7 +43,21 @@ export function ActivityCard(props) {
     // let likedButton;
     const [liked, setLiked] = useState(likedArray.includes(activityID));
     const [activity, setActivity] = useState('');
+    const [likedOrNot, setButton] = useState(false);
 
+    // let likedRef = firebase.database().ref(props.currentUser.uid).child(props.activity.activityID).child('status')
+    // let data;
+    // let imgSrc;
+    // likedRef.on('value', (snapshot) => {
+    //     data = snapshot.val()
+        
+    // });
+    // console.log(data);
+    // if (data == null || !data) {
+    //     setButton(false)
+    // } else {
+    //     setButton(true)
+    // }
     // useEffect(() => {
     //     const likedRef = firebase.database().ref('liked')
     //     likedRef.on('value', (snapshot) => {
@@ -79,7 +93,8 @@ export function ActivityCard(props) {
     const postLike = (event) => {
         event.preventDefault();
 
-        let likedButtonPressed = false
+
+        // let likedButtonPressed = false
         // const newUserObj = {
         //     activity: props.activity.activityID,
         // }
@@ -88,19 +103,20 @@ export function ActivityCard(props) {
         // const childRef = userRef.child(newUserObj.activity)
         childRef.on('value', function (snapshot) {
             snapshot.forEach(function (child) {
-                if (child.node_.value_ == newUserObj.activity) {
-                    likedButtonPressed = true
-                }
-            });
-        });
-        userRef.on('value', function (snapshot) {
-            snapshot.forEach(function (child) {
-                if (child.node_.value_ == newUserObj.activity) {
+                if (child.node_.value_ == true) {
                     curr = true
-                    // likedButtonPressed = true
                 }
             });
         });
+        // userRef.on('value', function (snapshot) {
+        //     snapshot.forEach(function (child) {
+        //         console.log(child)
+        //         if (child.node_.value_ == newUserObj.activity) {
+        //             curr = true
+        //             // likedButtonPressed = true
+        //         }
+        //     });
+        // });
         if (curr) {
             // userRef.child(newUserObj.activity).remove()
             childRef.child('status').set(false)
@@ -109,6 +125,7 @@ export function ActivityCard(props) {
             // childRef.child('status').set(-1);
             // childRef.child('liked').remove();
             curr = false
+            setButton(false)
             // likedImgSrc = "\"notLiked.png\""
             // let likedCopy = false;
             // setLiked(likedCopy)
@@ -118,9 +135,9 @@ export function ActivityCard(props) {
             // let copyLiked = false
             // setLiked(copyLiked)
         } else {
-
             userRef.child(newUserObj.activity).set(newUserObj.activity)
             childRef.child('status').set(true)
+            setButton(true)
             // childRef.child('status').update(true)
             //childRef.child('status').set(true)
             // console.log(childRef.child('status'))
@@ -189,6 +206,7 @@ export function ActivityCard(props) {
     // let likedButton = <div>
     //     <button onClick={postLike} className="btn" type="button"><img src="notLiked.png" alt="Like button" /></button>
     // </div>
+    
     let likedRef = childRef.child('status')
     let data;
     let imgSrc;
@@ -197,12 +215,21 @@ export function ActivityCard(props) {
     </div>
     likedRef.on('value', (snapshot) => {
         data = snapshot.val()
-        console.log(snapshot)
-        // console.log(data)
-
-        // console.log(likedButton)
+        
     });
-    console.log(data)
+    //This handles the onClick change when the the button is liked or not.
+    if (likedOrNot) {
+        likedButton = <div>
+             <button onClick={postLike} className="btn" type="button"><img src="liked.png" alt="Like button" /></button>
+         </div>
+    } else {
+        likedButton = <div>
+             <button onClick={postLike} className="btn" type="button"><img src="notLiked.png" alt="Like button" /></button>
+         </div>
+    }
+    
+    //This is supposed handle the intital liked posts. However, due to asynchronous calls there is a delay between the data download and the rendering process.
+    // So when you save this file, the hearts' colors will change accordingly but when you refresh on the actual website, the color resets back to default.
     if (data == null || !data) {
         likedButton = <div>
             <button onClick={postLike} className="btn" type="button"><img src="notLiked.png" alt="Like button" /></button>
@@ -214,8 +241,8 @@ export function ActivityCard(props) {
         </div>
         imgSrc = "liked.png"
     }
-    
-    console.log(imgSrc)
+    // console.log(imgSrc)
+
     // childRef.on("value", (snapshot) => {
     //     likedButton = <div>
     //         <button onClick={postLike} className="btn" type="button"><img src="liked.png" alt="Like button" /></button>
