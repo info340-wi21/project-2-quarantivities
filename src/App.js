@@ -78,8 +78,6 @@ function App(props) {
             <AboutNav />
             <button className="btn btn-sm btn-outline-secondary ml-3" onClick={handleSignOut}>Log Out</button>
           </div>
-
-
         </section>
 
         <main>
@@ -106,9 +104,6 @@ function App(props) {
       </div>
     );
   }
-
-
-
 
   return (app);
 }
