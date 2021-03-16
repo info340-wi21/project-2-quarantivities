@@ -7,7 +7,7 @@ body {
     font-size: 16px;
     font-family: sans-serif;
     background-color: #f5f5dc;
-    margin: 2em;
+    margin: 0.5em;
 }
 
 p {
@@ -28,9 +28,15 @@ h2 {
     font-size: 20px;
 }
 
+.container {
+    position: relative;
+    margin: 0 auto;
+}
+
 .map {
-    height: 500px;
+    height: 1000px;
     width: auto;
+    position: left;
 }
 /* Header */
 .header {

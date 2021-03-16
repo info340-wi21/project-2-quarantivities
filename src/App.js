@@ -9,7 +9,6 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useEffect, useState } from 'react';
-
 // FirebaseUI config
 const uiConfig = {
   signInOptions: [
@@ -25,17 +24,20 @@ const uiConfig = {
   }
 }
 
-// handle sign-out
-const handleSignOut = () => {
-  firebase.auth().signOut();
-}
+
 
 function App(props) {
+
 
   // holds the current site user
   const [user, setUser] = useState(undefined);
   const [likedArray, setLikedArray] = useState([]);
   const [likedIds, setLikedIds] = useState([]); //activity IDs
+  // handle sign-out
+  const handleSignOut = () => {
+    firebase.auth().signOut();
+    setLikedIds([]);
+  }
 
   // auth state event listener
   useEffect(() => { // run after component loads
@@ -67,12 +69,10 @@ function App(props) {
     app = (
       <div>
         <section className="header">
-          <div>
-            <header>
-              <h1>Quarantivities</h1>
-              <p>Fun & Safe Activities in the Pacific Northwest</p>
-            </header>
-          </div>
+          <header>
+            <h1>Quarantivities</h1>
+            <p>Fun & Safe Activities in the Pacific Northwest</p>
+          </header>
 
 
           <div className="form-inline">
@@ -85,7 +85,7 @@ function App(props) {
           <Switch>
             <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
             <Route path="/About"><AboutPage /></Route>
-            <Route path="/Liked"><LikedPage activities={props.activities} likedIds={likedIds} setLikedIds={setLikedIds} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
+            <Route path="/Liked"><LikedPage activities={props.activities} likedIds={likedIds} setLikedIds={setLikedIds} currentUser={user} /></Route>
             <Redirect to="/" />
           </Switch>
         </main>

@@ -13,7 +13,7 @@ export function LikedPage(props) {
     let searchQuery = "";
     let showOutdoor = true;
     let showIndoor = true;
-
+    
     useEffect(() => {
         const userRef = firebase.database().ref(props.currentUser.uid);
         activities.forEach(activity => {

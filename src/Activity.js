@@ -13,9 +13,6 @@ export function ActivityCard(props) {
     let imgLink = props.activity.imgLink;
     let moreInfoLink = props.activity.moreInfoLink;
 
-    let likedArray = props.likedArray;
-    let setLikedArray = props.setLikedArray;
-
     // More info button functionality
     const [moreInfo, setMoreInfo] = useState(false);
     const handleClick = () => {
@@ -37,7 +34,7 @@ export function ActivityCard(props) {
     }
 
     // Like button functionality
-    const [curr, setCurr] = useState(false);
+    const [liked, setLiked] = useState(false);
 
     useEffect(() => {
         const userRef = firebase.database().ref(props.currentUser.uid)
@@ -49,7 +46,7 @@ export function ActivityCard(props) {
 
         childRef.on('value', function (snapshot) {
             snapshot.forEach(function (child) {
-                setCurr(child.node_.value_);
+                setLiked(child.node_.value_);
             });
         });
         
@@ -66,18 +63,19 @@ export function ActivityCard(props) {
         }
         const childRef = userRef.child(newUserObj.activity);
 
-        if (curr) {
+        if (liked) {
             childRef.child('status').set(false)
  
         } else {
             userRef.child(newUserObj.activity).set(newUserObj.activity)
             childRef.child('status').set(true)
         }
+        // location.reload(true);
     }
 
     let likedButton;
 
-    if (curr === undefined || !curr) {
+    if (liked === undefined || !liked) {
         likedButton = <div>
             <button onClick={postLike} className="btn" type="button"><img src="notLiked.png" alt="Like button" /></button>
         </div>
@@ -129,7 +127,7 @@ export function ActivityList(props) {
 
             return (
                 <div key={activity.activityID} >
-                    <ActivityCard activity={activity} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={props.currentUser} />
+                    <ActivityCard activity={activity} currentUser={props.currentUser} />
                 </div>
             );
         } else {

@@ -20,17 +20,17 @@ export function Main(props) {
 
             <div className="container">
                 <div className="row">
-                    <div className="col-md-4 col-sm-12">
+                    <div className="col-md-6 col-sm-12">
                         <div className="map" id="map" aria-label="interactive map of all activities">
                             {/*<!-- map will show up here --> */}
                             <MakeMap activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} />
                         </div>
                     </div>
-                    <div className="col-md-8 col-sm-12">
+                    <div className="col-md-6 col-sm-12">
                         <section className="activities-container">
 
                             {/*<!-- rendered activities will show up here --> */}
-                            <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={props.currentUser} />
+                            <ActivityList activities={props.activities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} currentUser={props.currentUser} />
                          </section>
                     </div>
                 </div>
