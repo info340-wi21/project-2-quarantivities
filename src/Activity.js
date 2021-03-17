@@ -41,13 +41,22 @@ export function ActivityCard(props) {
         const userRef = firebase.database().ref(props.currentUser.uid)
 
         const newUserObj = {
-            activity: props.activity.activityID
+            activity: props.activity.activityID,
+            // name: props.activity.name,
+            // description: props.activity.description,
+            // tags: props.activity.tags,
+            // rating: props.activity.rating,
+            // streetAddress: props.activity.streetAddress,
+            // imgLink: props.activity.imgLink,
+            // moreInfoLink: props.activity.moreInfoLink
+
         }
         const childRef = userRef.child(newUserObj.activity);
 
         userRef.on('value', function (snapshot) {
             snapshot.forEach(function (child) {
-                if (child.node_.value_ == newUserObj.activity)
+                //console.log(child.val().activity);
+                if (child.val().activity == newUserObj.activity)
                 // console.log(child.node_.value_)
                 // setLiked(child.node_.value_);
                 setLiked(true);
@@ -55,7 +64,7 @@ export function ActivityCard(props) {
         });
         
         return () => childRef.off('value');
-    }, [])
+    })
 
     const postLike = (event) => {
         event.preventDefault();
@@ -63,17 +72,26 @@ export function ActivityCard(props) {
         const userRef = firebase.database().ref(props.currentUser.uid);
 
         const newUserObj = {
-            activity: props.activity.activityID
+            activity: props.activity.activityID,
+            name: props.activity.name,
+            description: props.activity.description,
+            tags: props.activity.tags,
+            rating: props.activity.rating,
+            streetAddress: props.activity.streetAddress,
+            imgLink: props.activity.imgLink,
+            moreInfoLink: props.activity.moreInfoLink
         }
         const childRef = userRef.child(newUserObj.activity);
 
         if (liked) {
-            userRef.child(newUserObj.activity).remove()
+            userRef.child(newUserObj.activity).remove();
+            setLiked(false);
             // childRef.child('status').set(false)
             // userRef.child(props.currentUser.uid).set(newUserObj.activity);
             // userRef.child(childRef).remove();
         } else {
-            userRef.child(newUserObj.activity).set(newUserObj.activity)
+            userRef.child(newUserObj.activity).set(newUserObj);
+            setLiked(true);
             // userRef.push(newUserObj.activity);
             // userRef.child(newUserObj.activity).set(newUserObj.activity)
             // childRef.child('status').set(true)
@@ -82,6 +100,8 @@ export function ActivityCard(props) {
     }
 
     let likedButton;
+
+    console.log(liked);
 
     if (liked === undefined || !liked) {
         likedButton = <div>
@@ -123,7 +143,7 @@ export function ActivityList(props) {
     let firstLoad = props.firstLoad;
     let showOutdoor = props.showOutdoor;
     let showIndoor = props.showIndoor;
-    console.log(props.activities)
+    //console.log(props.activities)
     let allActivities = props.activities.map((activity) => {
 
         let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();

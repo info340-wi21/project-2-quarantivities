@@ -4,7 +4,7 @@ import { AboutPage } from './About';
 import { LikedPage } from './Liked'
 import { Main } from './Main';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import {ActivityList} from './Activity'
+import { ActivityList } from './Activity'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -54,28 +54,28 @@ function App(props) {
       setUser(firebaseUser);
     })
     if (user) {
-    const userRef = firebase.database().ref(firebase.auth().currentUser.uid);
+      const userRef = firebase.database().ref(firebase.auth().currentUser.uid);
 
-        props.activities.forEach(activity => {
-            const childRef = userRef.child(activity.activityID);
-            userRef.on('value', function (snapshot) {
-                snapshot.forEach(function(child) {
-                    // console.log("child node: " + child.node_.value_)
-                    if(child.node_.value_ == activity.activityID) {
-                        // setLikedIds(likedIds.filter(id => id!==activity.activityID))
-                        setLikedIds([...likedIds, activity]);
-                        // likedActivities.push(activity)
-                    }
+      props.activities.forEach(activity => {
+        const childRef = userRef.child(activity.activityID);
+        userRef.on('value', function (snapshot) {
+          snapshot.forEach(function (child) {
+            // console.log("child node: " + child.node_.value_)
+            if (child.node_.value_ == activity.activityID) {
+              // setLikedIds(likedIds.filter(id => id!==activity.activityID))
+              setLikedIds([...likedIds, activity]);
+              // likedActivities.push(activity)
+            }
 
-                    // } else if(child.node_.value_ && !likedIds.includes(snapshot.key)) {
-                    //     setLikedIds([...likedIds, snapshot.key]);
-                    // }
-                })
-                // console.log(snapshot.val())
-            })
-            console.log(likedActivities)
-        });
-      }
+            // } else if(child.node_.value_ && !likedIds.includes(snapshot.key)) {
+            //     setLikedIds([...likedIds, snapshot.key]);
+            // }
+          })
+          // console.log(snapshot.val())
+        })
+        console.log(likedActivities)
+      });
+    }
   }, [])
 
   let app = null; // content that will render
@@ -115,14 +115,15 @@ function App(props) {
             <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
             <Route path="/About"><AboutPage /></Route>
             {/* <Route path="/Liked"><LikedPage likedActivities={likedActivities} likedIds={likedIds} setLikedIds={setLikedIds} currentUser={user} /></Route> */}
-            <Route path="/Liked"><div>
-            <main>
+            <Route path="/Liked">
+              <LikedPage currentUser={user}></LikedPage>
+              {/*<div> <main>
                 <h1>Liked Activities</h1>
                 <ActivityList activities={likedIds} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={user} />
 
-            </main>
-        </div>
-          </Route>
+              </main>
+            </div> */}
+            </Route>
             <Redirect to="/" />
           </Switch>
         </main>

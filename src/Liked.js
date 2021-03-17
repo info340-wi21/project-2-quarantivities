@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityList } from './Activity';
+import { ActivityCard, ActivityList } from './Activity';
 import firebase from 'firebase/app';
 
 
@@ -14,7 +14,50 @@ export function LikedPage(props) {
     let showOutdoor = true;
     let showIndoor = true;
 
+    let likedActivities = ["testvalue"];
 
+    
+
+    const userRef = firebase.database().ref(props.currentUser.uid);
+
+    // let name = props.activity.name;
+    // let description = props.activity.description;
+    // let tags = props.activity.tags;
+    // let rating = props.activity.rating;
+    // let streetAddress = props.activity.streetAddress;
+    // let imgLink = props.activity.imgLink;
+    // let moreInfoLink = props.activity.moreInfoLink;
+
+    // activityID={child.val().activity} name={child.val().name} description={child.val().description} tags={child.val().tags} rating={child.val().rating} streetAddress={child.val().streetAddress} imgLink={child.val().imgLink} moreInfoLink={child.val().moreInfoLink}
+
+    
+
+    userRef.on('value', function (snapshot) {
+        snapshot.forEach(function (child) {
+            console.log(child.val().activity);
+            let tempActivity = {
+                activityID: child.val().activity,
+                name: child.val().name,
+                description: child.val().description,
+                tags: child.val().tags,
+                rating: child.val().rating,
+                streetAddress: child.val().streetAddress,
+                imgLink: child.val().imgLink,
+                moreInfoLink: child.val().moreInfoLink
+            }
+
+            console.log("temp" + tempActivity);
+
+            likedActivities.push(<ActivityCard key={tempActivity.activityID} activity={tempActivity} currentUser={props.currentUser} ></ActivityCard>);
+            
+            // if (child.val().activity == newUserObj.activity)
+            //     // console.log(child.node_.value_)
+            //     // setLiked(child.node_.value_);
+            //     setLiked(true);
+        });
+    });
+
+ 
 
     // useEffect(() => {
     //     const userRef = firebase.database().ref(props.currentUser.uid);
@@ -39,7 +82,7 @@ export function LikedPage(props) {
     //         console.log(likedActivities)
     //     });
     // }, [])
-    
+
 
 
     // activities.forEach(activity => {
@@ -49,14 +92,16 @@ export function LikedPage(props) {
     //         }
     //     })
     // });
-    console.log(props.likedActivities)
+
     return (
         <div>
-            <main>
+            {likedActivities}
+            {console.log(likedActivities)}
+            {/* <main>
                 <h1>Liked Activities</h1>
                 <ActivityList activities={props.likedActivities} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={props.currentUser} />
 
-            </main>
+            </main> */}
         </div>
     );
 }
