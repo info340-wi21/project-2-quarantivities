@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import firebase from 'firebase/app';
+import { Children } from 'react';
 
 export function ActivityCard(props) {
 
@@ -44,9 +45,12 @@ export function ActivityCard(props) {
         }
         const childRef = userRef.child(newUserObj.activity);
 
-        childRef.on('value', function (snapshot) {
+        userRef.on('value', function (snapshot) {
             snapshot.forEach(function (child) {
-                setLiked(child.node_.value_);
+                if (child.node_.value_ == newUserObj.activity)
+                // console.log(child.node_.value_)
+                // setLiked(child.node_.value_);
+                setLiked(true);
             });
         });
         
@@ -64,11 +68,15 @@ export function ActivityCard(props) {
         const childRef = userRef.child(newUserObj.activity);
 
         if (liked) {
-            childRef.child('status').set(false)
- 
+            userRef.child(newUserObj.activity).remove()
+            // childRef.child('status').set(false)
+            // userRef.child(props.currentUser.uid).set(newUserObj.activity);
+            // userRef.child(childRef).remove();
         } else {
             userRef.child(newUserObj.activity).set(newUserObj.activity)
-            childRef.child('status').set(true)
+            // userRef.push(newUserObj.activity);
+            // userRef.child(newUserObj.activity).set(newUserObj.activity)
+            // childRef.child('status').set(true)
         }
         // location.reload(true);
     }
@@ -115,7 +123,7 @@ export function ActivityList(props) {
     let firstLoad = props.firstLoad;
     let showOutdoor = props.showOutdoor;
     let showIndoor = props.showIndoor;
-
+    console.log(props.activities)
     let allActivities = props.activities.map((activity) => {
 
         let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();
