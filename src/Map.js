@@ -57,9 +57,9 @@ export function MakeMap(props) { // props would be activityObj
 
     return (
         <div className="map">
-            <MapContainer style={{ height: "50%", width: "auto", position: "sticky" }} center={[47.7511, -120.7401]} zoom={7}>
+            <MapContainer style={{ height: "100%", width: "auto", position: "sticky" }} center={[47.7511, -120.7401]} zoom={7}>
                 <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                    attribution='$copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>' />
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>' />
                 {array}
             </MapContainer>
         </div>

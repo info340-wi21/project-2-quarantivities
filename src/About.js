@@ -10,7 +10,7 @@ function AboutPage() {
                             <section>
                                 <h2>Problem Domain</h2>
                                 <p>Due to the COVID-19 pandemic, <a
-                                    href="https://www.governor.wa.gov/news-media/inslee-announces-stay-home-stay-healthy%C2%A0order">Jay
+                                    href="https://www.governor.wa.gov/news-media/inslee-announces-stay-home-stay-healthy%C2%A0order" target="_blank">Jay
                                         Inslee issued a stay-at-home order</a> on March 23rd,
                                     2020 that restricted Washington residents for a minimum of two weeks. After almost
                                     a year of most businesses being shut down or restricted, residents are getting restless
@@ -24,9 +24,9 @@ function AboutPage() {
                                     limits, and use their time most effectively.</p>
                                 <p>While there are websites or blogs that suggest social-distanced activities that are safe,
                                     most of the suggested activities are very generic (eg. <a
-                                        href="https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/safe-activities-during-covid19/art-20489385">attend
-                                        virtual fitness classNamees</a>,
-                                    <a href="https://blog.wa.aaa.com/travel/travel-tips/things-to-do-while-social-distancing/">go
+                                        href="https://www.mayoclinic.org/diseases-conditions/coronavirus/in-depth/safe-activities-during-covid19/art-20489385" target="_blank">attend
+                                        virtual fitness classes</a>, 
+                                    <a href="https://blog.wa.aaa.com/travel/travel-tips/things-to-do-while-social-distancing/" target="_blank"> go
                                         on a hike</a>)
                                     and we wanted to provide a web app that suggests personable and creative activity ideas.
                                     What our

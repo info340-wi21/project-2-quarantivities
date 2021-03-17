@@ -26,7 +26,7 @@ export function ActivityCard(props) {
             <button onClick={handleClick} className="btn btn-dark" type="button">Less Info</button>
             <p></p>
             <p className="card-text">Location: {streetAddress}</p>
-            <p className="card-text"><a href={moreInfoLink}>Link to more activity info</a></p>
+            <p className="card-text"><a href={moreInfoLink} target="_blank">Link to more activity info</a></p>
         </div>
     } else {
         infoButton = <div>

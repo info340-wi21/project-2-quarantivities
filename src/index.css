@@ -121,7 +121,7 @@ footer {
 }
 
 /* Media Queries */
-@media (max-width: 576px)
+@media (max-width: 540px)
 {
     .form-control {
         width: 50%;
@@ -132,7 +132,7 @@ footer {
     }
 }
 
-@media (min-width: 576px)
+@media (min-width: 540px)
 {
     .form-control {
         width: 100%;
