@@ -12,7 +12,7 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-export function MakeMap(props) { // props would be activityObj
+export function MakeMap(props) {
 
     let searchQuery = props.searchQuery;
     let firstLoad = props.firstLoad;
@@ -25,7 +25,6 @@ export function MakeMap(props) { // props would be activityObj
         let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();
         let elemOutdoor = JSON.parse((activity.outdoor));
         let correctInOutdoor = ((elemOutdoor === false) && (showIndoor === true)) || ((elemOutdoor === true) && (showOutdoor === true));
-
 
         // only render ActivityCard  & map if it meets filter requirements
         if (firstLoad || ((correctInOutdoor) && (activityDetails.includes(searchQuery)))) {

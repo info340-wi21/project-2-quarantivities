@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import firebase from 'firebase/app';
-import { Children } from 'react';
 
 export function ActivityCard(props) {
 
@@ -26,7 +25,7 @@ export function ActivityCard(props) {
             <button onClick={handleClick} className="btn btn-dark" type="button">Less Info</button>
             <p></p>
             <p className="card-text">Location: {streetAddress}</p>
-            <p className="card-text"><a href={moreInfoLink} target="_blank">Link to more activity info</a></p>
+            <p className="card-text"><a href={moreInfoLink} target="_blank" rel="noreferrer">Link to more activity info</a></p>
         </div>
     } else {
         infoButton = <div>
@@ -42,27 +41,17 @@ export function ActivityCard(props) {
 
         const newUserObj = {
             activity: props.activity.activityID,
-            // name: props.activity.name,
-            // description: props.activity.description,
-            // tags: props.activity.tags,
-            // rating: props.activity.rating,
-            // streetAddress: props.activity.streetAddress,
-            // imgLink: props.activity.imgLink,
-            // moreInfoLink: props.activity.moreInfoLink
-
         }
         const childRef = userRef.child(newUserObj.activity);
 
         userRef.on('value', function (snapshot) {
             snapshot.forEach(function (child) {
-                //console.log(child.val().activity);
-                if (child.val().activity == newUserObj.activity)
-                // console.log(child.node_.value_)
-                // setLiked(child.node_.value_);
-                setLiked(true);
+                if (child.val().activity === newUserObj.activity) {
+                    setLiked(true);
+                }
             });
         });
-        
+
         return () => childRef.off('value');
     })
 
@@ -81,27 +70,17 @@ export function ActivityCard(props) {
             imgLink: props.activity.imgLink,
             moreInfoLink: props.activity.moreInfoLink
         }
-        const childRef = userRef.child(newUserObj.activity);
 
         if (liked) {
             userRef.child(newUserObj.activity).remove();
             setLiked(false);
-            // childRef.child('status').set(false)
-            // userRef.child(props.currentUser.uid).set(newUserObj.activity);
-            // userRef.child(childRef).remove();
         } else {
             userRef.child(newUserObj.activity).set(newUserObj);
             setLiked(true);
-            // userRef.push(newUserObj.activity);
-            // userRef.child(newUserObj.activity).set(newUserObj.activity)
-            // childRef.child('status').set(true)
         }
-        // location.reload(true);
     }
 
     let likedButton;
-
-    console.log(liked);
 
     if (liked === undefined || !liked) {
         likedButton = <div>
@@ -143,7 +122,6 @@ export function ActivityList(props) {
     let firstLoad = props.firstLoad;
     let showOutdoor = props.showOutdoor;
     let showIndoor = props.showIndoor;
-    //console.log(props.activities)
     let allActivities = props.activities.map((activity) => {
 
         let activityDetails = (activity.name + " " + activity.description + " " + activity.streetAddress + " " + activity.tags).toLowerCase();

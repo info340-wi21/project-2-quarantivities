@@ -4,7 +4,6 @@ import { AboutPage } from './About';
 import { LikedPage } from './Liked'
 import { Main } from './Main';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { ActivityList } from './Activity'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -29,20 +28,14 @@ const uiConfig = {
 
 
 function App(props) {
-
-  let firstLoad = true;
-  let searchQuery = "";
-  let showOutdoor = true;
-  let showIndoor = true;
   // holds the current site user
   const [user, setUser] = useState(undefined);
   const [likedArray, setLikedArray] = useState([]);
   const [likedIds, setLikedIds] = useState([]); //activity IDs
-  let likedActivities = [];
+  
   // handle sign-out
   const handleSignOut = () => {
     firebase.auth().signOut();
-    // setLikedIds([]);
   }
 
   // auth state event listener
@@ -50,37 +43,26 @@ function App(props) {
     // listen for changes
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       // auth state has changed
-      console.log("auth state has changed!");
       setUser(firebaseUser);
     })
     if (user) {
       const userRef = firebase.database().ref(firebase.auth().currentUser.uid);
 
       props.activities.forEach(activity => {
-        const childRef = userRef.child(activity.activityID);
         userRef.on('value', function (snapshot) {
           snapshot.forEach(function (child) {
-            // console.log("child node: " + child.node_.value_)
-            if (child.node_.value_ == activity.activityID) {
-              // setLikedIds(likedIds.filter(id => id!==activity.activityID))
+            if (child.node_.value_ === activity.activityID) {
               setLikedIds([...likedIds, activity]);
-              // likedActivities.push(activity)
             }
-
-            // } else if(child.node_.value_ && !likedIds.includes(snapshot.key)) {
-            //     setLikedIds([...likedIds, snapshot.key]);
-            // }
           })
-          // console.log(snapshot.val())
         })
-        console.log(likedActivities)
       });
     }
-  }, [])
+  })
 
-  let app = null; // content that will render
+  let app = null; 
 
-  if (!user) { // if user is logged out
+  if (!user) { 
     app = (
       <div className="container">
         <div className="header pb-5">
@@ -94,7 +76,7 @@ function App(props) {
       </div>
     );
 
-  } else { // if user is logged in
+  } else { 
     app = (
       <div>
         <section className="header">
@@ -114,16 +96,7 @@ function App(props) {
           <Switch>
             <Route exact path="/"><Main activities={props.activities} likedArray={likedArray} setLikedArray={setLikedArray} currentUser={user} /></Route>
             <Route path="/About"><AboutPage /></Route>
-            {/* <Route path="/Liked"><LikedPage likedActivities={likedActivities} likedIds={likedIds} setLikedIds={setLikedIds} currentUser={user} /></Route> */}
-            <Route path="/Liked">
-              <LikedPage currentUser={user}></LikedPage>
-              {/*<div> <main>
-                <h1>Liked Activities</h1>
-                <ActivityList activities={likedIds} firstLoad={firstLoad} searchQuery={searchQuery} showOutdoor={showOutdoor} showIndoor={showIndoor} likedArray={props.likedArray} setLikedArray={props.setLikedArray} currentUser={user} />
-
-              </main>
-            </div> */}
-            </Route>
+            <Route path="/Liked"><LikedPage currentUser={user} /></Route>
             <Redirect to="/" />
           </Switch>
         </main>
