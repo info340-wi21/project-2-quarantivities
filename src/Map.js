@@ -30,6 +30,8 @@ export function MakeMap(props) {
         if (firstLoad || ((correctInOutdoor) && (activityDetails.includes(searchQuery)))) {
             filteredActivities.push(activity);
         }
+
+        return '' ;
     });
 
     let array = [];

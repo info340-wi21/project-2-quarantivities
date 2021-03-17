@@ -42,7 +42,6 @@ export function ActivityCard(props) {
         const newUserObj = {
             activity: props.activity.activityID,
         }
-        const childRef = userRef.child(newUserObj.activity);
 
         userRef.on('value', function (snapshot) {
             snapshot.forEach(function (child) {
@@ -52,7 +51,7 @@ export function ActivityCard(props) {
             });
         });
 
-        return () => childRef.off('value');
+        return () => userRef.off('value');
     })
 
     const postLike = (event) => {
