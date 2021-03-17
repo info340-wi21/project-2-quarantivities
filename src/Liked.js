@@ -3,7 +3,7 @@ import { ActivityCard } from './Activity';
 import firebase from 'firebase/app';
 
 export function LikedPage(props) {
-    let likedActivities = [""];
+    let likedActivities = [];
 
     const userRef = firebase.database().ref(props.currentUser.uid);
 
@@ -19,7 +19,6 @@ export function LikedPage(props) {
                 imgLink: child.val().imgLink,
                 moreInfoLink: child.val().moreInfoLink
             }
-
             likedActivities.push(<ActivityCard key={tempActivity.activityID} activity={tempActivity} currentUser={props.currentUser} ></ActivityCard>);
         });
     });
@@ -27,7 +26,7 @@ export function LikedPage(props) {
     return (
         <div>
             <h1 style={{ fontSize: "25px" }}>Liked Activities</h1>
-            {likedActivities}
+            {likedActivities}            
         </div>
     );
 }
